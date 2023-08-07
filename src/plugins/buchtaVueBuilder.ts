@@ -1,17 +1,11 @@
 import { Buchta } from "buchta";
-import { css } from "buchta/plugins/css";
-import { vue } from "buchta/plugins/vue";
 import Elysia from "elysia";
 import { existsSync, rmSync } from "fs";
+import { config } from "../../bux.config";
+import { vue } from "buchta/plugins/vue";
+import { css } from "buchta/plugins/css";
 import { basename, dirname } from "path";
-import { config } from "./bux.config";
 
-
-export const port = (app: Elysia) => {
-    let port = Number(Bun.env.port || config.port) || 3030
-    app.listen(port)
-    return app
-}
 
 export function bux(app: Elysia) {
     const extraRoutes = new Map<string, Function>();
@@ -35,15 +29,12 @@ const fixRoute = (route: string, append = true) => {
     // this will prevent piling up files from previous builds
     if (existsSync(process.cwd() + "/.buchta/"))
         rmSync(process.cwd() + "/.buchta/", { recursive: true });
-    let dirs = ["pages", "public", "assets", "components", "layouts"]
-    if (config.clientRoot) {
-        dirs = dirs.map( dir => config.clientRoot + '/' + dir)
-    }
+
     const buchta = new Buchta(false, {
         port: config.port,
         ssr: config.ssr,
-        rootDir: process.cwd(),
-        dirs,
+        rootDir: process.cwd() + config.clientRoot,
+        dirs: ["pages", "public", "assets", "components", "layouts"],
         plugins: [vue(), css()]
     });
 
@@ -92,4 +83,3 @@ const fixRoute = (route: string, append = true) => {
     
     return app;
 }
-

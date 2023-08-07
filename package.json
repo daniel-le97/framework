@@ -2,12 +2,19 @@
   "name": "framework",
   "version": "1.0.0",
   "module": "index.ts",
+  "scripts": {
+    "dev": "bun run --watch index.ts"
+  },
   "devDependencies": {
+    "bun-plugin-dts": "^0.1.0",
     "bun-types": "latest"
   },
   "dependencies": {
-    "buchta": "^0.5.99",
-    "elysia": "^0.5.16",
+    "@elysiajs/html": "^0.6.0",
+    "@elysiajs/swagger": "^0.6.0",
+    "buchta": "^0.5.100",
+    "elysia": "^0.6.1",
+    "elysia-fs-router": "^0.1.6",
     "primevue": "^3.29.2",
     "vue": "^3.3.4"
   }
