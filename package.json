@@ -10,7 +10,7 @@
     "bun-types": "latest"
   },
   "dependencies": {
-    "@elysiajs/html": "^0.6.0",
+    "@elysiajs/html": "^0.8.0",
     "@elysiajs/swagger": "^0.6.0",
     "buchta": "^0.5.100",
     "elysia": "^0.6.1",
